@@ -8,19 +8,31 @@
     "start": "NODE_ENV=production bun src/http/server.ts",
     "test": "bun test",
     "generate": "drizzle-kit generate:pg",
-    "migrate": "bun src/db/migrate.ts"
-  },
-  "devDependencies": {
-    "@types/bun": "latest",
-    "drizzle-kit": "^0.26.2"
-  },
-  "peerDependencies": {
-    "typescript": "^5.0.0"
+    "studio": "drizzle-kit studio",
+    "migrate": "bun src/db/migrate.ts",
+    "seed": "bun src/db/seed.ts",
+    "lint": "eslint --fix src/**/*.ts"
   },
   "dependencies": {
+    "@eslint/eslintrc": "^3.1.0",
+    "@eslint/js": "^9.13.0",
     "@paralleldrive/cuid2": "^2.2.2",
+    "dotenv": "^16.4.5",
     "drizzle-orm": "^0.35.2",
     "elysia": "^1.1.22",
-    "postgres": "^3.4.4"
+    "postgres": "^3.4.4",
+    "prettier": "^3.3.3",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^9.0.3",
+    "@rocketseat/eslint-config": "^2.1.0",
+    "@types/bun": "latest",
+    "chalk": "^5.3.0",
+    "drizzle-kit": "^0.26.2",
+    "eslint": "^9.13.0",
+    "eslint-plugin-drizzle": "^0.2.3",
+    "pg": "^8.13.0",
+    "typescript": "^5.6.3"
   }
 }
