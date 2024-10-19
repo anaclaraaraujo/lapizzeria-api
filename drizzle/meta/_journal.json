@@ -15,6 +15,13 @@
       "when": 1729284111535,
       "tag": "0001_zippy_tigra",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1729368517348,
+      "tag": "0002_eminent_malice",
+      "breakpoints": true
     }
   ]
 }
