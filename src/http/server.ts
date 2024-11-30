@@ -1,3 +1,4 @@
+import { cookie } from '@elysiajs/cookie'
 import { registerRestaurant } from './routes/register-restaurant'
 import { sendAuthLink } from './routes/send-auth-link'
 import { authenticateFromLink } from './routes/authenticate-from-link'
@@ -5,6 +6,7 @@ import { signOut } from './routes/sign-out'
 import Elysia from 'elysia'
 
 const app = new Elysia()
+  .use(cookie())
   .use(registerRestaurant)
   .use(sendAuthLink)
   .use(authenticateFromLink)

@@ -7,15 +7,20 @@ export const restaurants = pgTable('restaurants', {
   id: text('id')
     .$defaultFn(() => createId())
     .primaryKey(),
+
   name: text('name').notNull(),
+
   description: text('description'),
+
   managerId: text('manager_id').references(() => users.id, {
     onDelete: 'set null',
   }),
+
   createdAt: timestamp('created_at').notNull().defaultNow(),
   updatedAt: timestamp('updated_at').notNull().defaultNow(),
 })
 
+// relationships between the 'restaurants' table and other tables
 export const restaurantsRelations = relations(restaurants, ({ one }) => {
   return {
     manager: one(users, {

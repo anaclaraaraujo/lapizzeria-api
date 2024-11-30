@@ -1,0 +1,11 @@
+{
+  "extends": [
+    "@rocketseat/eslint-config/node",
+    "plugin:drizzle/all"
+  ],
+  "plugins": [
+    "drizzle",
+    "@typescript-eslint"
+  ],
+  "parser": "@typescript-eslint/parser"
+}

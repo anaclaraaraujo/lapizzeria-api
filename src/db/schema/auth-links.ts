@@ -1,12 +1,18 @@
-import { createId } from "@paralleldrive/cuid2";
-import { pgTable, text, timestamp } from "drizzle-orm/pg-core";
-import { users } from ".";
+import { createId } from '@paralleldrive/cuid2'
+import { pgTable, text, timestamp } from 'drizzle-orm/pg-core'
+import { users } from '.'
 
 export const authLinks = pgTable('auth_links', {
   id: text('id')
     .$defaultFn(() => createId())
     .primaryKey(),
+
+  // stores the authentication link code
   code: text('code').notNull().unique(),
-  userId: text('user_id').references(() => users.id).notNull(),
-  createdAt: timestamp('created_at').defaultNow()
+
+  userId: text('user_id')
+    .references(() => users.id)
+    .notNull(),
+
+  createdAt: timestamp('created_at').defaultNow(),
 })

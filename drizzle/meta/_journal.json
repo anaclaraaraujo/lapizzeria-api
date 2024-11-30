@@ -5,22 +5,8 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1729283583114,
-      "tag": "0000_open_the_watchers",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "7",
-      "when": 1729284111535,
-      "tag": "0001_zippy_tigra",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "7",
-      "when": 1729368517348,
-      "tag": "0002_eminent_malice",
+      "when": 1732966180811,
+      "tag": "0000_real_stingray",
       "breakpoints": true
     }
   ]

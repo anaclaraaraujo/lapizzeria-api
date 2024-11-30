@@ -6,9 +6,9 @@ services:
     environment:
       - POSTGRES_USER=docker
       - POSTGRES_PASSWORD=docker
-      - POSTGRES_DB=pizzashop
+      - POSTGRES_DB=lapizzeria
     volumes:
-      - pizzashop_pg_data:/bitnami/postgresql
+      - lapizzeria_pg_data:/bitnami/postgresql
 
 volumes:
-  pizzashop_pg_data:
+  lapizzeria_pg_data:

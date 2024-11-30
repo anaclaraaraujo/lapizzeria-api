@@ -6,7 +6,12 @@ import { drizzle } from 'drizzle-orm/postgres-js'
 import { migrate } from 'drizzle-orm/postgres-js/migrator'
 
 const connection = postgres(
-  `postgresql://${env.DB_USER}:${env.DB_PASSWORD}@${env.DB_HOST}:${env.DB_PORT}/${env.DB_NAME}`,
+  `postgresql://
+   ${env.DB_USER}
+  :${env.DB_PASSWORD}
+  @${env.DB_HOST}
+  :${env.DB_PORT}
+  /${env.DB_NAME}`,
   { max: 1 },
 )
 const db = drizzle(connection)
