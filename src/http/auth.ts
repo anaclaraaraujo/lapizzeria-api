@@ -2,6 +2,7 @@ import { Elysia, t, type Static } from 'elysia'
 import jwt from '@elysiajs/jwt'
 
 import { env } from '../env'
+import { UnauthorizedError } from './errors/unauthorized-error'
 
 const jwtPayload = t.Object({
   sub: t.String(),
@@ -9,6 +10,20 @@ const jwtPayload = t.Object({
 })
 
 export const auth = new Elysia()
+  .error({
+    UNAUTHORIZED: UnauthorizedError,
+  })
+  .onError(({ error, code, set }) => {
+    switch (code) {
+      case 'UNAUTHORIZED': {
+        set.status = 401
+        return {
+          code,
+          message: error.message,
+        }
+      }
+    }
+  })
   .use(
     jwt({
       secret: env.JWT_SECRET_KEY,
@@ -32,6 +47,17 @@ export const auth = new Elysia()
       // function to remove the authentication cookie (sign-out)
       signOut: async () => {
         auth.remove()
+      },
+
+      getCurrentUser: async () => {
+        const payload = await jwt.verify(auth.value)
+        if (!payload) {
+          throw new UnauthorizedError()
+        }
+        return {
+          userId: payload.sub,
+          restaurantId: payload.restaurantId,
+        }
       },
     }
   })
