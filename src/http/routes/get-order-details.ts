@@ -8,9 +8,11 @@ export const getOrderDetails = new Elysia().use(auth).get(
   async ({ getCurrentUser, params, set }) => {
     const { orderId } = params
     const { restaurantId } = await getCurrentUser()
+
     if (!restaurantId) {
       throw new UnauthorizedError()
     }
+
     const order = await db.query.orders.findFirst({
       columns: {
         id: true,
@@ -45,10 +47,12 @@ export const getOrderDetails = new Elysia().use(auth).get(
         return eq(fields.id, orderId)
       },
     })
+
     if (!order) {
       set.status = 400
       return { message: 'Order not found.' }
     }
+
     return order
   },
   {

@@ -40,6 +40,7 @@ export const authenticateFromLink = new Elysia().use(auth).get(
       authLinkFromCode.createdAt,
       'days',
     )
+
     if (daysSinceAuthLinkWasCreated > 7) {
       return new Response(
         JSON.stringify({
