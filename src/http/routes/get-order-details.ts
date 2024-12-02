@@ -1,25 +1,25 @@
 import Elysia, { t } from 'elysia'
-import { auth } from '../auth'
-import { UnauthorizedError } from '../errors/unauthorized-error'
-import { db } from '../../db/connection'
-import { and } from 'drizzle-orm'
+import { authentication } from '../authentication'
+import { db } from '@/db/connection'
+import { UnauthorizedError } from './errors/unauthorized-error'
+import { NotAManagerError } from './errors/not-a-manager-error'
 
-export const getOrderDetails = new Elysia().use(auth).get(
-  '/orders/:orderId',
-  async ({ getCurrentUser, params, set }) => {
-    const { orderId } = params
+export const getOrderDetails = new Elysia().use(authentication).get(
+  '/orders/:id',
+  async ({ getCurrentUser, params }) => {
+    const { id: orderId } = params
     const { restaurantId } = await getCurrentUser()
 
     if (!restaurantId) {
-      throw new UnauthorizedError()
+      throw new NotAManagerError()
     }
 
     const order = await db.query.orders.findFirst({
       columns: {
         id: true,
+        createdAt: true,
         status: true,
         totalInCents: true,
-        createdAt: true,
       },
       with: {
         customer: {
@@ -44,7 +44,7 @@ export const getOrderDetails = new Elysia().use(auth).get(
           },
         },
       },
-      where(fields, { eq }) {
+      where(fields, { eq, and }) {
         return and(
           eq(fields.id, orderId),
           eq(fields.restaurantId, restaurantId),
@@ -53,15 +53,14 @@ export const getOrderDetails = new Elysia().use(auth).get(
     })
 
     if (!order) {
-      set.status = 400
-      return { message: 'Order not found.' }
+      throw new UnauthorizedError()
     }
 
     return order
   },
   {
     params: t.Object({
-      orderId: t.String(),
+      id: t.String(),
     }),
   },
 )

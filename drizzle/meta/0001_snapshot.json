@@ -1,6 +1,6 @@
 {
-  "id": "60c76ab9-6e60-4aa3-936c-e3911f3f40ba",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "b5fefed8-edba-4c4c-8b39-f783e77b805f",
+  "prevId": "60c76ab9-6e60-4aa3-936c-e3911f3f40ba",
   "version": "5",
   "dialect": "pg",
   "tables": {
@@ -57,7 +57,15 @@
       "indexes": {},
       "foreignKeys": {},
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
+      "uniqueConstraints": {
+        "users_email_unique": {
+          "name": "users_email_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "email"
+          ]
+        }
+      }
     },
     "restaurants": {
       "name": "restaurants",
@@ -476,7 +484,6 @@
       "name": "order_status",
       "values": {
         "pending": "pending",
-        "approved": "approved",
         "canceled": "canceled",
         "processing": "processing",
         "delivering": "delivering",

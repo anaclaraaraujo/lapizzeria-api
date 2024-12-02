@@ -4,8 +4,6 @@
     "plugin:drizzle/all"
   ],
   "plugins": [
-    "drizzle",
-    "@typescript-eslint"
-  ],
-  "parser": "@typescript-eslint/parser"
+    "drizzle"
+  ]
 }
